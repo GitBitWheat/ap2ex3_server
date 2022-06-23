@@ -9,9 +9,16 @@ namespace ap2ex3_server.Data
 {
     public class ap2ex3_serverContext : DbContext
     {
+        private const string connectionString = "server=localhost;port=5016;database=ap2ex3_server.Data;user=root;password=P@$$W0rd";
+
         public ap2ex3_serverContext (DbContextOptions<ap2ex3_serverContext> options)
             : base(options)
         {
+        }
+
+        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+        {
+            optionsBuilder.UseMySql(connectionString, MariaDbServerVersion.AutoDetect(connectionString));
         }
 
         public DbSet<ap2ex3_server.Models.User>? User { get; set; }
