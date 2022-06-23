@@ -87,7 +87,7 @@ namespace ap2ex3_server.Controllers
             List<Message>? msgList = await _service.GetMessagesBetweenUserAndContact(loggedUserId, id);
 
             if (msgList == null)
-                msgList = new List<Message>();
+                return NotFound();
 
             return Ok(Enumerable.Select(msgList, message => new MessageApiModel(message)).ToArray());
         }
